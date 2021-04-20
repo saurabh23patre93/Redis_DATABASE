@@ -1,0 +1,41 @@
+			Date : 07/08/2020
+			Spring Boot Redis -2
+			Redis as Cache
+			Mr. RAGHU
+-----------------------------------------------------------
+FB: https://www.facebook.com/groups/thejavatemple/
+Email: javabyraghu@gmail.com
+
+Cache : It is a Temp memory, it is used between Server(App) and database.
+
+=> This is used to reduce n/w calls if we trying to fetch same data 
+   multiple times from database.
+
+=> ** DO NOT IMPLEMENT CACHE for all modules. Select modules which are actually mostly used.
+  Ex: GmailApp -> Inbox**, Sent, Drafts, ...etc
+
+=> Cache supports 3 operations:
+
+
+  a. @Cacheable: Fetch Data from DB to App store in cache
+  b. @CachePut: Update Data at cache while it is updating in DB
+  c. @CacheEvict:  Remove Data at cache while it is removing in DB
+
+Syntax:
+   @Cache__(value="CACHE-REG",key="#Variable").
+
+=> Those operations are effected to selected Region. (Region is a area/memory part of Cache
+   created for one module) Ex: EMP-REG, STD-REG,..etc.
+
+*) Hibernate : 1st Level Cache(Session) and 2nd Level Cache (Session Factory Cache)
+
+*) Spring Data JPA (Spring Boot 2.x) works on its own cache managers.
+
+
+http://localhost:8080/employee/save
+http://localhost:8080/employee/all
+http://localhost:8080/employee/one/1
+http://localhost:8080/employee/modify/1
+http://localhost:8080/employee/remove/1
+
+http://localhost:8080/actuator

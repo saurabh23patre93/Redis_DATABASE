@@ -1,0 +1,77 @@
+			Date : 06/08/2020
+			Spring Boot - Redis
+			(Database and Cache)
+---------------------------------------------------------------
+	FB: https://www.facebook.com/groups/thejavatemple/
+	Email : javabyraghu@gmail.com
+
+Redis - Open Source S/w
+=> In Memory Database
+   It is like Empty Memory
+   No SQL , No Tables, No Sequence, No JOINS..etc
+   String, HashOperation**, List, Set...etc
+   In-built services Tx, Clear memory..etc
+
+=> ***Cache Manager [Spring Boot Rest + Data JPA]
+
+=> Message Broker (MQ)
+
+----------------------------------------
+=> To create Connection between App and Redis DB, use RedisConnectionFactory(I)
+   which has 2 Impl classes: JedisConnectionFactory, LettuceConnectionFactory
+   also provide properties for Redis (host and port)
+
+#1.
+@Bean
+public RedisConnectionFactory cf() {
+  return new LettuceConnectionFactory();
+}
+
+#2. application.properties
+## Redis Key-val (props)
+spring.redis.host=localhost
+spring.redis.port=6379
+------------------------------------------------------------
+Redis Download:
+# Goto Location:
+https://github.com/microsoftarchive/redis/releases/tag/win-3.2.100
+# Click on : Redis-x64-3.2.100.zip and extract to a folder
+# Open C:\Downloads\Redis-x64-3.2.100
+# Double click on : redis-server.exe
+
+----------------------Example Application-------------------------------------
+			Spring Boot - Redis as Database
+------------------------------------------------------------------------------
+#1. Create one Spring Boot Startre Project
+   Name : SpringBootRedisAsDb
+   Dep  : Redis, Lombok
+
+pom.xml
+spring-boot-starter-data-redis, lombok
+
+#2. application.properties
+spring.redis.host=localhost
+spring.redis.port=6379
+
+#3. Model class
+  Student(stdId,stdName,stdFee)
+
+#4. Spring Config File
+  a) Redis Connection
+  b) Redis Template
+
+#5. Define one Interface (IDao)
+ IStudentDao : add, modify, getOne, getAll, remove
+
+#6. Define Impl for IDao (DaoImpl)
+ StudentDaoImpl <-- using HashOperations<H,HK,HV>
+  H (HRef) = String ('STUDENT')
+  HK  (Key)= Integer (stdId)
+  HV  (Val)= Student Type
+
+#7. Test Operations [Test all operations using IStudentDao]
+  class : RedisOprTest
+
+#8. Run
+-> Start Redis Server
+-> Run Spring boot App
